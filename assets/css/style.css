@@ -1,0 +1,90 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    padding: 0;
+    margin: 0;
+    
+}
+/* navbar css  */
+#navbar{
+    background-color: #000000;
+    color: #fff;
+}
+.nav-link{
+    color: #F26E21 !important;
+}
+#navbar input{
+    width: 280px;
+}
+#search-btn{
+    background-color: #F26E21;
+    border: none;
+}
+/* card css  */
+.card{
+    border: none !important;
+}
+.card-link{
+    color: #000000;
+    text-decoration-line: none;
+}
+.product-card{
+    height: 310px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card-body{
+    padding-top: 0px !important;
+}
+#details-btn{
+    color: #F26E21;
+    border: 1px solid #F26E21;
+}
+#buy-now-btn{
+    color: #fff;
+    background-color: #F26E21;
+}
+/*  */
+    /* details page css  */
+/*  */
+.main-details-image{
+    border-radius: 15px;
+}
+.other-details-image{
+    border: 1px solid #F26E21;
+}
+/* footer css */
+footer{
+    background-color: #000000;
+}
+footer p{
+    cursor: pointer;
+    font-size: 14px;
+}
+footer p:hover{
+    color: #F26E21;
+}
+#telephone-btn{
+    width: 90%;
+    color: #F26E21;
+    font-weight: 700;
+    font-size: 26px;
+    padding: 5px 0px;
+    border: 1px solid #F26E21;
+    border-radius: 8px;
+    background-color: #000000;
+}
+.email-number-btn{
+    color: #fff;
+    border: none;
+    font-size: smaller;
+    background-color: #000000;
+}
+.social-account i:hover{
+    color: #F26E21;
+    cursor: pointer;
+}
+
+
