@@ -10,12 +10,17 @@ main().catch(err => console.log(err));
 
 // import { faker } from '@faker-js/faker';
 
-
 const BrandSchema = new mongoose.Schema({
   name: String
 });
-
-
+const SliderSchema = new mongoose.Schema({
+  image: String
+});
+const ProductSchema = new mongoose.Schema({
+  image: String,
+  name: String,
+  price: Number
+});
 
 const app = express()
 const port = 3000
@@ -33,8 +38,6 @@ app.get('/details-page', (req, res) => {
   res.render('details-page')
 })
 
-
-
 app.get('/brand-data-insert', async (req, res) => {
   const BrandModel = mongoose.model('brands', BrandSchema);
   
@@ -44,23 +47,37 @@ app.get('/brand-data-insert', async (req, res) => {
       name: faker.commerce.productAdjective()
     })
   }
-
   res.send('data inserted')
-})
-
-
+  
+});
 
 app.get('/sliders-data-insert', async (req, res) => {
-  
-})
+  const SliderModel = mongoose.model('sliders', SliderSchema);
+
+  for(let i =0; i< 4; i++){
+    await SliderModel.create({
+      image: faker.image.url()
+    })
+  }
+  res.send('data inserted')
+
+});
 
 app.get('/products-data-insert', async (req, res) => {
-  
+  const ProductModel = mongoose.model('products', ProductSchema);
+
+  for(let i =0; i< 100; i++){
+    await ProductModel.create({
+      image: faker.image.url(),
+      name: faker.commerce.productName(),
+      price: faker.commerce.price()
+    })
+  }
+  res.send('data inserted')
+
 })
 
-
-
-
+/*
 
 app.get('/fake-data-test', async (req, res) => {
   const BrandModel = mongoose.model('brands', BrandSchema);
@@ -92,7 +109,6 @@ app.get('/fake-data-test', async (req, res) => {
   //insert using save method
   await brand.save()
 
-
   //insert using create method 
   await BrandModel.create({
     name: faker.commerce.productAdjective()
@@ -101,6 +117,7 @@ app.get('/fake-data-test', async (req, res) => {
   res.send('Data Inserted')
 })
 
+*/
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
