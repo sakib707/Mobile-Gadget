@@ -1,22 +1,7 @@
 <div class="mt-4 mb-4">
     <div class="btn-group-sm">
-        <button type="button" class="btn btn-light shadow">Apple</button>
-        <button type="button" class="btn btn-light shadow">Samsung</button>
-        <button type="button" class="btn btn-light shadow">Xiaomi</button>
-        <button type="button" class="btn btn-light shadow">OnePlus</button>
-        <button type="button" class="btn btn-light shadow">Realme</button>
-        <button type="button" class="btn btn-light shadow">Oppo</button>
-        <button type="button" class="btn btn-light shadow">Vivo</button>
-        <button type="button" class="btn btn-light shadow">Motorola</button>
-        <button type="button" class="btn btn-light shadow">Honor</button>
-        <button type="button" class="btn btn-light shadow">Nokia</button>
-        <button type="button" class="btn btn-light shadow">Huawe</button>
-        <button type="button" class="btn btn-light shadow">LG</button>
-        <button type="button" class="btn btn-light shadow">Asus</button>
-        <button type="button" class="btn btn-light shadow">Infinix</button>
-        <button type="button" class="btn btn-light shadow">Tecno</button>
-        <button type="button" class="btn btn-light shadow">Itel</button>
-        <button type="button" class="btn btn-light shadow">Sony</button>
-        <button type="button" class="btn btn-light shadow">Microsoft</button>
+        <% for(let i= 0; i < brands.length; i++) {%>
+            <button type="button" class="btn btn-light mt-1 shadow"><%- brands[i].name -%></button>
+        <% } %>
     </div>
 </div>

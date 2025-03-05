@@ -16,26 +16,50 @@ const BrandSchema = new mongoose.Schema({
 const SliderSchema = new mongoose.Schema({
   image: String
 });
+
+
+
+
 const ProductSchema = new mongoose.Schema({
   image: String,
   name: String,
-  price: Number
+  price: Number,
+  images: Array
 });
 
 const app = express()
-const port = 3000
+const port = 3001
 
 let assets_folder = express.static('assets')
 app.use(assets_folder)
 
 app.set('view engine', 'ejs')
 
-app.get('/brotherszone.com', (req, res) => {
-  res.render('home')
+app.get('/', async (req, res) => {
+
+  //connect with brands collection
+  const BrandModel = mongoose.model('brands', BrandSchema) 
+  const ProductsModel = mongoose.model('products', ProductSchema)
+  //getting data 
+  const brand_data = await BrandModel.find({})
+  const products_data = await ProductsModel.find({});
+  //render home.ejs and passing data for showing
+  res.render('home', {
+    brands: brand_data,
+    products: products_data
+  })
 })
 
-app.get('/details-page', (req, res) => {
-  res.render('details-page')
+app.get('/details-page/:id',async (req, res) => {
+  //connect with brands collection
+  const BrandModel = mongoose.model('brands', BrandSchema) 
+  const ProductsModel = mongoose.model('products', ProductSchema)
+  //getting data 
+  const brand_data = await BrandModel.find({})
+
+  res.render('details-page',{
+    brands: brand_data
+  })
 })
 
 app.get('/brand-data-insert', async (req, res) => {
@@ -66,11 +90,32 @@ app.get('/sliders-data-insert', async (req, res) => {
 app.get('/products-data-insert', async (req, res) => {
   const ProductModel = mongoose.model('products', ProductSchema);
 
+  await ProductModel.deleteMany({})
+
   for(let i =0; i< 100; i++){
     await ProductModel.create({
-      image: faker.image.url(),
+      image: faker.image.url({
+        height: 400,
+        width: 720
+      }),
       name: faker.commerce.productName(),
-      price: faker.commerce.price()
+      price: faker.commerce.price(),
+      images: [
+        faker.image.url({
+          height: 200,
+          width: 360
+        }),
+
+        faker.image.url({
+          height: 200,
+          width: 360
+        }),
+
+        faker.image.url({
+          height: 200,
+          width: 360
+        })
+      ]
     })
   }
   res.send('data inserted')
