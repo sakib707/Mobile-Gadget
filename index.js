@@ -89,7 +89,7 @@ app.get('/sliders-data-insert', async (req, res) => {
 
 app.get('/products-data-insert', async (req, res) => {
   const ProductModel = mongoose.model('products', ProductSchema);
-
+  console.log("I am from rakib")
   await ProductModel.deleteMany({})
 
   for(let i =0; i< 100; i++){
