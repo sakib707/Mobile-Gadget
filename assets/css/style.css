@@ -30,7 +30,7 @@ body{
     text-decoration-line: none;
 }
 .product-card{
-    height: 310px;
+    height: 315px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -38,6 +38,12 @@ body{
 .card-body{
     padding-top: 0px !important;
 }
+.clamped-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
 #details-btn{
     color: #F26E21;
     border: 1px solid #F26E21;
@@ -50,7 +56,7 @@ body{
     /* details page css  */
 /*  */
 .main-details-image{
-    border-radius: 15px;
+    /* border-radius: 15px; */
 }
 .other-details-image{
     border: 2px solid #F26E21;

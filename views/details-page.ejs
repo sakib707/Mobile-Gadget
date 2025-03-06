@@ -5,24 +5,17 @@
     <div class="container">
         <%- include('button-groupe') -%>
 
-        <div class="row mb-5 mt-5">
+        <div class="row mb-5 mt-4">
             <div class="col-4">
-                <div class="main-details-image border p-1">
-                    <img class="w-100" src="https://adminapi.applegadgetsbd.com/storage/media/large/4500-46591.jpg" alt="">
+                <div class="main-details-image border p-2">
+                    <img class="w-100" src="<%- productData.image -%>" alt="">
                 </div>
                 <div class="row mt-4">
-                    <div class="col-3 other-details-image">
-                        <img class="w-100" src="https://adminapi.applegadgetsbd.com/storage/media/large/4500-46591.jpg" alt="">
-                    </div>
-                    <div class="col-3">
-                        <img class="w-100" src="https://adminapi.applegadgetsbd.com/storage/media/large/4500-46591.jpg" alt="">
-                    </div>
-                    <div class="col-3">
-                        <img class="w-100" src="https://adminapi.applegadgetsbd.com/storage/media/large/4500-46591.jpg" alt="">
-                    </div>
-                    <div class="col-3">
-                        <img class="w-100" src="https://adminapi.applegadgetsbd.com/storage/media/large/4500-46591.jpg" alt="">
-                    </div>
+                    <% for(let i = 0; i < 4; i++){ %>
+                        <div class="col-3 other-details-image">
+                            <img class="w-100" src="<%- productData.images[i] -%>" alt="">
+                        </div>
+                    <% } %>
                 </div>
             </div>
             <div class="col-8">

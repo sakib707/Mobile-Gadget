@@ -40,27 +40,37 @@ app.get('/', async (req, res) => {
   //connect with brands collection
   const BrandModel = mongoose.model('brands', BrandSchema) 
   const ProductsModel = mongoose.model('products', ProductSchema)
+  const SliderModel = mongoose.model('sliders', SliderSchema) 
   //getting data 
   const brand_data = await BrandModel.find({})
   const products_data = await ProductsModel.find({});
+  const slider_data = await BrandModel.find({})
+
   //render home.ejs and passing data for showing
   res.render('home', {
     brands: brand_data,
-    products: products_data
+    products: products_data,
+    sliders: slider_data
   })
-})
+
+});
 
 app.get('/details-page/:id',async (req, res) => {
+
+  const id = req.params.id;
   //connect with brands collection
   const BrandModel = mongoose.model('brands', BrandSchema) 
   const ProductsModel = mongoose.model('products', ProductSchema)
   //getting data 
   const brand_data = await BrandModel.find({})
+  const product_data = await ProductsModel.findOne({ _id: id})
 
   res.render('details-page',{
-    brands: brand_data
+    brands: brand_data,
+    productData: product_data
   })
-})
+
+});
 
 app.get('/brand-data-insert', async (req, res) => {
   const BrandModel = mongoose.model('brands', BrandSchema);
@@ -89,42 +99,27 @@ app.get('/sliders-data-insert', async (req, res) => {
 
 app.get('/products-data-insert', async (req, res) => {
   const ProductModel = mongoose.model('products', ProductSchema);
-<<<<<<< HEAD
-  console.log("hello")
-=======
-  console.log("I am from rakib")
->>>>>>> 19316ad77aef2fe2dd7394c0dfff45293c1c94af
+
   await ProductModel.deleteMany({})
 
   for(let i =0; i< 100; i++){
+    const images = [
+      faker.image.url({ height: 1080, width: 1080 }),
+      faker.image.url({ height: 1080, width: 1080 }),
+      faker.image.url({ height: 1080, width: 1080 }),
+      faker.image.url({ height: 1080, width: 1080 })
+    ];
+
     await ProductModel.create({
-      image: faker.image.url({
-        height: 400,
-        width: 720
-      }),
+      image: faker.image.url({ height: 1080, width: 1080 }),
       name: faker.commerce.productName(),
       price: faker.commerce.price(),
-      images: [
-        faker.image.url({
-          height: 200,
-          width: 360
-        }),
-
-        faker.image.url({
-          height: 200,
-          width: 360
-        }),
-
-        faker.image.url({
-          height: 200,
-          width: 360
-        })
-      ]
+      images: images // Save images as an array
     })
   }
   res.send('data inserted')
 
-})
+});
 
 /*
 
