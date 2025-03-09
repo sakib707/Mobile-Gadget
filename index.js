@@ -44,13 +44,13 @@ app.get('/', async (req, res) => {
   //getting data 
   const brand_data = await BrandModel.find({})
   const products_data = await ProductsModel.find({});
-  const slider_data = await BrandModel.find({})
+  const slider_data = await SliderModel.find({})
 
   //render home.ejs and passing data for showing
   res.render('home', {
     brands: brand_data,
     products: products_data,
-    sliders: slider_data
+    sliders: JSON.stringify(slider_data) // convert slider_data object to string
   })
 
 });
@@ -90,7 +90,10 @@ app.get('/sliders-data-insert', async (req, res) => {
 
   for(let i =0; i< 4; i++){
     await SliderModel.create({
-      image: faker.image.url()
+      image: faker.image.url({
+        height: 400,
+        width: 600
+      })
     })
   }
   res.send('data inserted')

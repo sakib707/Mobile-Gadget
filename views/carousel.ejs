@@ -3,3 +3,35 @@
         <img id="image" src="" alt="" style="object-fit: cover; width: 100%;">
     </div>
 </div>
+
+
+<script>
+// carousel js code
+let i = 0;
+let image = document.getElementById("image");
+
+// get data from serverside with json format
+let slidersJson = `<%- sliders %>`
+
+// convert json format data to javascript object
+let sliderObj = JSON.parse(slidersJson)
+
+let data = [];
+
+//inital equal to i
+for(let inital =0; inital < sliderObj.length; inital++){
+    var item = sliderObj[inital];
+
+    data.push({
+        image: item.image
+    });
+}
+
+setInterval(function(){
+    let item = data[i++];
+    image.src = item.image;
+    if(data.length === i){
+        i = 0;
+    }
+},1500)
+</script>
