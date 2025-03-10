@@ -37,19 +37,72 @@ app.set('view engine', 'ejs')
 
 app.get('/', async (req, res) => {
 
+  
+  
+
   //connect with brands collection
   const BrandModel = mongoose.model('brands', BrandSchema) 
   const ProductsModel = mongoose.model('products', ProductSchema)
-  const SliderModel = mongoose.model('sliders', SliderSchema) 
+  const SliderModel = mongoose.model('sliders', SliderSchema)
+  
+
+  //get url query paramiter use `query` propery in requset object
+  const query_param = req.query;
+
+  //count total data in model or collection
+  const total_product = await ProductsModel.countDocuments();
+
+  //undefined, Null, false, 'when empty string', [when empty array], {when empty object}  this data type returns false
+  
+  const page =  query_param.page ?? 1;
+
+  //or
+
+  /*
+  if(query_param.page){
+    page = query_param.page
+  }
+  else{
+    page = 1
+  }
+  */
+
+
+
+  const show_perpage = 12;
+  const skip_data = (page - 1) * show_perpage;
+  let total_page_count = total_product / show_perpage;
+
+  //Math.ceil() return nearest upper integer value like 6.2 = 7, 8.2 = 9
+  total_page_count = Math.ceil(total_page_count)
+
+  /*
+  1 -1 * 10 = 0
+  2 -1* 10 = 20 
+  3 -1* 10 = 30 
+  */
+
+
+
+
   //getting data 
+  const products_data = await ProductsModel.find({}).skip(skip_data).limit(show_perpage);
+
+
+
   const brand_data = await BrandModel.find({})
-  const products_data = await ProductsModel.find({});
   const slider_data = await SliderModel.find({})
 
   //render home.ejs and passing data for showing
   res.render('home', {
     brands: brand_data,
     products: products_data,
+
+
+    active_page: page,
+    total_page_count: total_page_count, // send total page count in browser 
+    
+    
     sliders: JSON.stringify(slider_data) // convert slider_data object to string
   })
 
