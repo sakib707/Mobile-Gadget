@@ -46,7 +46,7 @@ app.get('/', async (req, res) => {
   const SliderModel = mongoose.model('sliders', SliderSchema)
   
 
-  //get url query paramiter use `query` propery in requset object
+  //get url query paramiter use `query` property in requset object
   const query_param = req.query;
 
   //count total data in model or collection
@@ -99,7 +99,7 @@ app.get('/', async (req, res) => {
     products: products_data,
 
 
-    active_page: page,
+    active_page: parseInt(page),
     total_page_count: total_page_count, // send total page count in browser 
     
     
@@ -143,10 +143,7 @@ app.get('/sliders-data-insert', async (req, res) => {
 
   for(let i =0; i< 4; i++){
     await SliderModel.create({
-      image: faker.image.url({
-        height: 400,
-        width: 600
-      })
+      image: faker.image.url({ height: 570, width: 1920 })
     })
   }
   res.send('data inserted')

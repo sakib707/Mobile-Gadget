@@ -21,6 +21,10 @@ body{
     background-color: #F26E21;
     border: none;
 }
+/* Carousel css */
+#carousel-parent{
+    cursor: pointer;
+}
 /* card css  */
 .card{
     border: none !important;
@@ -51,6 +55,12 @@ body{
 #buy-now-btn{
     color: #fff;
     background-color: #F26E21;
+}
+/* pagination css  */
+.active-bg{
+    background-color: #ECECEE !important;
+    color: #F26E21 !important;
+    border: none !important;
 }
 /*  */
     /* details page css  */

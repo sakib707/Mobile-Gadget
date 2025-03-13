@@ -4,7 +4,9 @@
 
     <div class="container">
         <%- include('button-groupe') -%>
-        <%- include('carousel') -%>
+        <% if( active_page == 1 ){%>
+            <%- include('carousel') -%>
+        <%}%>
         <%- include('card') -%>
         <%- include('pagination') -%>
     

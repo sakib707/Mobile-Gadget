@@ -1,37 +1,35 @@
-<div id="parent" class="mb-5" style="cursor: pointer;">
-    <div class="container">
-        <img id="image" src="" alt="" style="object-fit: cover; width: 100%;">
-    </div>
+<div id="carousel-parent" class="mb-5">
+    <img id="image" src="" alt="" style="object-fit: cover; width: 100%;">
 </div>
 
 
 <script>
-// carousel js code
-let i = 0;
-let image = document.getElementById("image");
+    // carousel js code
+    let i = 0;
+    let image = document.getElementById("image");
 
-// get data from serverside with json format
-let slidersJson = `<%- sliders %>`
+    // get data from serverside with json format
+    let slidersJson = `<%- sliders -%>`
 
-// convert json format data to javascript object
-let sliderObj = JSON.parse(slidersJson)
+    // convert json format data to javascript object
+    let slidersData = JSON.parse(slidersJson)
 
-let data = [];
+    let data = [];
 
-//inital equal to i
-for(let inital =0; inital < sliderObj.length; inital++){
-    var item = sliderObj[inital];
+    //initial equal to i
+    for(let inital =0; inital < slidersData.length; inital++){
+        var item = slidersData[inital];
 
-    data.push({
-        image: item.image
-    });
-}
-
-setInterval(function(){
-    let item = data[i++];
-    image.src = item.image;
-    if(data.length === i){
-        i = 0;
+        data.push({
+            image: item.image
+        });
     }
-},1500)
+
+    setInterval(function(){
+        let item = data[i++];
+        image.src = item.image;
+        if(data.length === i){
+            i = 0;
+        }
+    },1500)
 </script>
