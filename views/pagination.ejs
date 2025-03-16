@@ -1,7 +1,9 @@
 <div>
+
+
     <ul class="pagination">
         <li class="page-item">
-            <a href="?page=<%= active_page > 1 ? active_page - 1 : 1 %>" class="page-link bg-primary text-light">Prev</a>
+            <a href="?page=<%- active_page > 1 ? active_page - 1 : 1 %>" class="page-link bg-primary text-light">Prev</a>
         </li>
         
         <% for(let i = 1; i <= total_page_count; i++){ %>
@@ -15,7 +17,7 @@
         <% } %>
         
         <li class="page-item">
-            <a href="?page=<%= active_page < total_page_count ? active_page + 1 : total_page_count %>" class="page-link bg-primary text-light">Next</a>
+            <a href="?page=<%- active_page < total_page_count ? active_page + 1 : total_page_count %>" class="page-link bg-primary text-light">Next</a>
         </li>
     </ul>
 </div>

@@ -8,11 +8,18 @@
         <div class="row mb-5 mt-4">
             <div class="col-4">
                 <div class="main-details-image border p-2">
-                    <img class="w-100" src="<%- productData.image -%>" alt="">
+                    <img id="thumbnailElement" class="w-100" src="<%- productData.image -%>" alt="">
                 </div>
+
+                <!-- More Images -->
                 <div class="row mt-4">
-                    <% for(let i = 0; i < 4; i++){ %>
-                        <div class="col-3 other-details-image">
+
+                    <div class="col-3 p-2 more-image-element">
+                        <img class="w-100" src="<%- productData.image -%>" alt="">
+                    </div>
+
+                    <% for(let i = 0; i < productData.images.length; i++){ %>
+                        <div class="col-3 p-2 more-image-element">
                             <img class="w-100" src="<%- productData.images[i] -%>" alt="">
                         </div>
                     <% } %>
@@ -48,6 +55,47 @@
         </div>
     
     </div>
+
+
+
+    <script>
+        
+
+        const thumbnailElement = document.getElementById('thumbnailElement')
+        //select all element
+        const moreImageElements = document.querySelectorAll('.more-image-element')
+
+        
+        moreImageElements.forEach(function(item){
+        
+            item.addEventListener('click', function(event){
+
+                const moreImageEl = event.target.closest('.more-image-element');
+
+                const imageElement = moreImageEl.querySelector('img')
+                
+                const imageSrc = imageElement.getAttribute('src');
+                
+                //for remove active class each element
+                moreImageElements.forEach(function(element){
+                    document.querySelectorAll('.more-image-element').forEach(function (el) {
+                        el.classList.remove('other-details-image');
+                    });
+                })
+
+
+                moreImageEl.classList.add('other-details-image')
+
+
+                thumbnailElement.setAttribute('src', imageSrc)
+
+
+            })
+
+
+        })
+
+    </script>
 
 <%- include('footer') -%>
 
