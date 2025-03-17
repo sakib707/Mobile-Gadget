@@ -2,13 +2,13 @@ const express = require('express')
 const { faker } =  require('@faker-js/faker');
 const mongoose = require('mongoose');
 
+const {Schema, Types} = mongoose; //mongoose.Schema // new code 
+
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/brotherszone');
 }
 
 main().catch(err => console.log(err));
-
-// import { faker } from '@faker-js/faker';
 
 const BrandSchema = new mongoose.Schema({
   name: String
@@ -19,13 +19,32 @@ const SliderSchema = new mongoose.Schema({
 
 
 
-
 const ProductSchema = new mongoose.Schema({
+  brand_id: { type: Schema.Types.ObjectId, ref: 'brands' }, // new code 
   image: String,
   name: String,
   price: Number,
   images: Array
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const app = express()
 const port = 3001
@@ -43,6 +62,12 @@ app.get('/', async (req, res) => {
   //connect with brands collection
   const BrandModel = mongoose.model('brands', BrandSchema) 
   const ProductsModel = mongoose.model('products', ProductSchema)
+
+  /* new code for test */ 
+  // const ProductD = await ProductsModel.findOne().populate('brand_id').exec();
+  // return res.send(ProductD)
+
+
   const SliderModel = mongoose.model('sliders', SliderSchema)
   
 
@@ -86,7 +111,9 @@ app.get('/', async (req, res) => {
 
 
   //getting data 
-  const products_data = await ProductsModel.find({}).skip(skip_data).limit(show_perpage);
+  const products_data = await ProductsModel.find({}).skip(skip_data).limit(show_perpage)
+  .populate('brand_id') //new code 
+  .exec(); //new code 
 
 
 
@@ -146,12 +173,28 @@ app.get('/sliders-data-insert', async (req, res) => {
       image: faker.image.url({ height: 570, width: 1920 })
     })
   }
+
   res.send('data inserted')
 
 });
 
+
+
+
+
 app.get('/products-data-insert', async (req, res) => {
   const ProductModel = mongoose.model('products', ProductSchema);
+
+  const BrandModel = mongoose.model('brands', BrandSchema);
+
+  // new code modify 
+  const BrandData = await BrandModel.find(
+    {}, // first paramiter condtion object
+    
+    {_id: 1} // second paramiter projection object
+  );
+
+  // return res.send(BrandData);
 
   await ProductModel.deleteMany({})
 
@@ -167,12 +210,21 @@ app.get('/products-data-insert', async (req, res) => {
       image: faker.image.url({ height: 1080, width: 1080 }),
       name: faker.commerce.productName(),
       price: faker.commerce.price(),
-      images: images // Save images as an array
+      images: images, // Save images as an 
+      
+      
+      /* new code relation data id insert */
+      //brand: new Types.ObjectId('67c856649ee9815c9f005917'), //moongose.Types.ObjectId()
+      // brand_id: BrandData[0]._id,
+      brand_id: faker.helpers.arrayElement(BrandData)._id
+      
     })
   }
   res.send('data inserted')
 
 });
+
+
 
 /*
 
