@@ -65,8 +65,8 @@ body{
 /*  */
     /* details page css  */
 /*  */
-.main-details-image{
-    /* border-radius: 15px; */
+.more-image-element{
+    cursor: pointer;
 }
 .other-details-image{
     border: 2px solid #F26E21;

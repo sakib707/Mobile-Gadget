@@ -159,7 +159,6 @@ app.get('/products-data-insert', async (req, res) => {
     const images = [
       faker.image.url({ height: 1080, width: 1080 }),
       faker.image.url({ height: 1080, width: 1080 }),
-      faker.image.url({ height: 1080, width: 1080 }),
       faker.image.url({ height: 1080, width: 1080 })
     ];
 
